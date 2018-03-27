@@ -1,31 +1,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    if (request.getMethod().equalsIgnoreCase("POST")) {
-    String userName = request.getParameter("username");
-    String password = request.getParameter("password");
-    if (userName.equals("admin") && password.equals("password")) {
-        response.sendRedirect("/profile");
-        }
-        }
-        %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:if test="${ not empty param.username && not empty param.password}">
+    <c:if test="${ param.username.equals(\"admin\") &&
+    param.password.equals(\"password\")}">
+        <c:redirect url="profile.jsp"/>
+    </c:if>
+</c:if>
 <html>
 <head>
     <title>Login</title>
 </head>
 <body>
-    <h1 id="login">Login Page</h1>
-    <c:if test="${loggedIn}">
-        res.sendRedirect("/profile.jsp");
-    </c:if>
-
-    <form id="login" action="profile.jsp" method="post">
-        <label for="userName">
+    <h1>Login Page</h1>
+    <form method="post" action="/login.jsp">
+        <label for="username">
             Username:
-            <input id="userName" type="text" placeholder="Enter your username">
+            <input id="username" name="username" type="text" placeholder="Enter your username">
         </label>
         <label for="password">
             Password
-            <input id="password" type="password" placeholder="Enter your password">
+            <input id="password" name="password" type="password" placeholder="Enter your password">
         </label>
         <button>Submit</button>
     </form>
