@@ -3,8 +3,11 @@
 <html>
 <head>
     <title><%= "Cool Website" %></title>
-
 </head>
 <body>
+    <jsp:include page="partials/header.jsp"></jsp:include>
+    <a href="login.jsp" style="margin: auto; padding: 5rem;">
+        Go here to login!!!!
+    </a>
 </body>
 </html>
