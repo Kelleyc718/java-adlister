@@ -1,13 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title><%= "Cool Website" %></title>
+    <jsp:include page="/partials/head.jsp">
+        <jsp:param name="title" value="Welcome!"/>
+    </jsp:include>
 </head>
 <body>
-    <jsp:include page="partials/header.jsp"></jsp:include>
-    <a href="login.jsp" style="margin: auto; padding: 5rem;">
-        Go here to login!!!!
-    </a>
+<jsp:include page="/partials/nav.jsp"/>
+<jsp:include page="/partials/scripts.jsp"/>
 </body>
 </html>
