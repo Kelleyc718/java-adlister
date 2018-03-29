@@ -11,11 +11,9 @@ public class Login extends HttpServlet {
         req.getRequestDispatcher("/login.jsp").forward(req, res);
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws
-            IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-
         if (username.equals("admin") && password.equals("password")) {
             res.sendRedirect("/profile");
         } else {

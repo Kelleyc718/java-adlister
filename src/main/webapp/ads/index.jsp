@@ -7,10 +7,9 @@
     </jsp:include>
 </head>
 <body>
-    <jsp:useBean id="ad" scope="application" type="java.util.List"/>
-    <c:forEach var="ads" items="${ad}">
-        <h1>${ads.title}</h1>
-        <p>${ads.body}</p>
+    <c:forEach var="ad" items="${ads}">
+        <h1>${ad.title}</h1>
+        <p>${ad.description}</p>
     </c:forEach>
 </body>
 </html>
