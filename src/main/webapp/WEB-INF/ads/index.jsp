@@ -11,14 +11,15 @@
 
 <div class="container">
     <h1>Here Are all the ads!</h1>
+    <small>Create an Ad below or check out what we have!</small>
 
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
-            <h2>${ad.title}</h2>
-            <p>${ad.description}</p>
+            <h2><c:out value="${ad.title}"/></h2>
+            <p><c:out value="${ad.description}"/></p>
+            <p><c:out value="${username}"/> </p>
         </div>
     </c:forEach>
 </div>
-
 </body>
 </html>
