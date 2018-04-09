@@ -11,6 +11,7 @@
 
     <div class="container">
         <h1>Welcome, <c:out value="${sessionScope.user.username}"/>!</h1>
+        <a href="/update">Change password?</a>
     </div>
 
 </body>

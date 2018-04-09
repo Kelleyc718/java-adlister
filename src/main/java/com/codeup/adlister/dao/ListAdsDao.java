@@ -28,7 +28,7 @@ public class ListAdsDao implements Ads {
     }
 
     @Override
-    public String userName() {
+    public Ad findById(long id) {
         return null;
     }
 

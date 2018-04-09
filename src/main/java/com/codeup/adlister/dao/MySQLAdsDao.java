@@ -26,7 +26,7 @@ public class MySQLAdsDao implements Ads {
     public List<Ad> all() {
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT * FROM ads");
+            stmt = connection.prepareStatement("SELECT * FROM ads JOIN users u on ads.user_id = u.id");
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
@@ -53,31 +53,32 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-    @Override
-    public String userName() {
-        try {
-            String query = "SELECT username FROM users INNER\n" +
-                    "  JOIN ads a on users.id = a.user_id\n" +
-                    "WHERE user_id LIKE a.user_id";
-
-            PreparedStatement stmt = connection.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            return rs.getString(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
             rs.getLong("id"),
             rs.getLong("user_id"),
             rs.getString("title"),
-            rs.getString("description")
+            rs.getString("description"),
+            rs.getString("username")
         );
     }
+
+    @Override
+    public Ad findById(long id) {
+        String query = "SELECT * FROM ads\n" +
+                        "JOIN users u on ads.user_id = u.id\n" +
+                        "WHERE ads.id = ? LIMIT 1";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return extractAd(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding that ad", e);
+        }
+    }
+
 
     private List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
         List<Ad> ads = new ArrayList<>();
